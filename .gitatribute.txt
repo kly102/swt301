@@ -1,0 +1,7 @@
+'build/web/OrderManagerUser.jsp' --text
+'nbproject/ant-deploy.xml' --text
+'src/java/controller/ManagerOrderUser.java' --text
+'src/java/controller/manager/EditOrderManager.java' --text
+'src/java/controller/manager/ManagerOrder.java' --text
+'src/java/controller/manager/favManager.java' --text
+'web/OrderManagerUser.jsp' --text
