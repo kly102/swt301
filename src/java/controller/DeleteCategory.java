@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,7 +20,7 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "DeleteCategory", urlPatterns = {"/DeleteCategory"})
 public class DeleteCategory extends HttpServlet {
-
+Logger logger = Logger.getLogger(getClass().getName());
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,6 +30,7 @@ public class DeleteCategory extends HttpServlet {
             try {
                 categoryDBContext.deleteCategory(Integer.parseInt(cId));
             } catch (Exception e) {
+                logger.info("ID incorrect format");
             }
             response.sendRedirect("managerCategory");
         } else {
@@ -41,7 +43,6 @@ public class DeleteCategory extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
     }
 
     /**

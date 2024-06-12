@@ -30,29 +30,34 @@ import model.Shipping;
 @WebServlet(name = "CheckOutController", urlPatterns = {"/checkout"})
 public class CheckOutController extends HttpServlet {
 
+    private static final String ACC_ATTRIBUTE = "acc";
+    private static final String CARTS_ATTRIBUTE = "carts";
+    private static final String TOTAL_MONEY_ATTRIBUTE = "totalMoney";
+    private static final String CHECKOUT_PAGE = "checkout.jsp";
+    private static final String LOGIN_PAGE = "login.jsp";
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getSession().getAttribute("acc") != null) {
+        if (request.getSession().getAttribute(ACC_ATTRIBUTE) != null) {
             HttpSession session = request.getSession();
-            Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
+            Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute(CARTS_ATTRIBUTE);
             if (carts == null) {
                 carts = new LinkedHashMap<>();
             }
 
-            //tinh tong tien
+            // Calculate total money
             double totalMoney = 0;
             for (Map.Entry<Integer, Cart> entry : carts.entrySet()) {
-                Integer productId = entry.getKey();
                 Cart cart = entry.getValue();
 
                 totalMoney += cart.getQuantity() * cart.getProduct().getPrice();
-
             }
-            request.setAttribute("totalMoney", totalMoney);
-            request.getRequestDispatcher("checkout.jsp").forward(request, response);
+
+            request.setAttribute(TOTAL_MONEY_ATTRIBUTE, totalMoney);
+            request.getRequestDispatcher(CHECKOUT_PAGE).forward(request, response);
         } else {
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher(LOGIN_PAGE).forward(request, response);
         }
     }
 
@@ -81,7 +86,7 @@ public class CheckOutController extends HttpServlet {
         int shippingId = new ShippingDBcontext().createReturnId(shipping); //trả về id tự tăng của bản ghi vừa lưu vào database
         //Lưu Order
         HttpSession session = request.getSession();
-        Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
+        Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute(CARTS_ATTRIBUTE);
         if (carts == null) {
             carts = new LinkedHashMap<>();
         }
@@ -89,7 +94,6 @@ public class CheckOutController extends HttpServlet {
         //tinh tong tien
         double totalPrice = 0;
         for (Map.Entry<Integer, Cart> entry : carts.entrySet()) {
-            Integer productId = entry.getKey();
             Cart cart = entry.getValue();
 
             totalPrice += cart.getQuantity() * cart.getProduct().getPrice();
@@ -104,7 +108,7 @@ public class CheckOutController extends HttpServlet {
 
         new OrderDetailDBcontext().saveCart(orderId, carts);
 
-        session.removeAttribute("carts");
+        session.removeAttribute(CARTS_ATTRIBUTE);
         request.setAttribute("cartss", carts);
         request.setAttribute("totalPrice", totalPrice);
         request.getRequestDispatcher("thank").forward(request, response);

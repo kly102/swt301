@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 import model.Account;
 import model.Category;
 
-public class CategoryDBContext extends DBContext { //thao tác với bảng category
+public class CategoryDBContext extends DBContext{ //thao tác với bảng category
 
     public List<Category> getAllCategories() {
         List<Category> list = new ArrayList<>();
@@ -38,7 +38,7 @@ public class CategoryDBContext extends DBContext { //thao tác với bảng cate
         return list;
     }
 
-    public List<Category> getAllCategoriesByPage(int page, int PAGE_SIZE) {
+    public List<Category> getAllCategoriesByPage(int page, int pageSize) {
         List<Category> list = new ArrayList<>();
         try {
             String sql = "select * from Category "
@@ -47,8 +47,8 @@ public class CategoryDBContext extends DBContext { //thao tác với bảng cate
 
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, page);
-            stm.setInt(2, PAGE_SIZE);
-            stm.setInt(3, PAGE_SIZE);
+            stm.setInt(2, pageSize);
+            stm.setInt(3, pageSize);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Category category = new Category();

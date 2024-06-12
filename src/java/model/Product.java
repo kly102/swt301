@@ -13,25 +13,22 @@ public class Product {
     double price;
     String tiltle;
     String description;
-    int sell_ID;
+    int sellID;
     int categoryId;
 
     public Product() {
     }
 
-    public Product(int id, String name, String imageUrl, double price, String tiltle, String description, int sell_ID, int categoryId) {
+    public Product(int id, String name, String imageUrl, double price, String tiltle, String description, int sellID, int categoryId) {
         this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
         this.price = price;
         this.tiltle = tiltle;
         this.description = description;
-        this.sell_ID = sell_ID;
+        this.sellID = sellID;
         this.categoryId = categoryId;
     }
-
-  
-    
 
     public int getId() {
         return id;
@@ -81,12 +78,12 @@ public class Product {
         this.description = description;
     }
 
-    public int getSell_ID() {
-        return sell_ID;
+    public int getSellID() {
+        return sellID;
     }
 
-    public void setSell_ID(int sell_ID) {
-        this.sell_ID = sell_ID;
+    public void setSellID(int sellID) {
+        this.sellID = sellID;
     }
 
     public int getCategoryId() {
@@ -97,4 +94,5 @@ public class Product {
         this.categoryId = categoryId;
     }
 
+    
 }

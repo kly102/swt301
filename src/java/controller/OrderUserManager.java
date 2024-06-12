@@ -1,28 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
+
+
+import dal.OrderDBcontext;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.ArrayList;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.Cart;
+import model.Account;
+import model.Order;
 
 /**
  *
- * @author Admin
+ * @author buiph
  */
-@WebServlet(name = "CartController", urlPatterns = {"/carts"})
-public class CartController extends BaseRequiredAuthenController {
+@WebServlet(urlPatterns = {"/OrderUserManager"})
+public class OrderUserManager extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,32 +34,29 @@ public class CartController extends BaseRequiredAuthenController {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequests(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+              throws ServletException, IOException {
         if (request.getSession().getAttribute("acc") != null) {
-            /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession();
-            Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
-            if (carts == null) {
-                carts = new LinkedHashMap<>();
+            String sort = "DESC";
+            if (request.getParameter("sort") != null) {
+                sort = request.getParameter("sort");
             }
-
-            //tinh tong tien
-            double totalMoney = 0;
-            for (Map.Entry<Integer, Cart> entry : carts.entrySet()) {
-                Cart cart = entry.getValue();
-
-                totalMoney += cart.getQuantity() * cart.getProduct().getPrice();
-
+            Account account = (Account) request.getSession().getAttribute("acc");
+            ArrayList<Order> listOrder = new OrderDBcontext().getAllOrderByIDAccount(account.getUid(), sort);
+           
+            request.setAttribute("listOrder", listOrder);
+            if (sort.equals("DESC")) {
+                sort = "ASC";
+            }else{
+                sort = "DESC";
             }
-            request.setAttribute("totalMoney", totalMoney);
-            request.setAttribute("carts", carts);
-            request.getRequestDispatcher("cart.jsp").forward(request, response);
+             request.setAttribute("sort", sort);
+            
+            request.getRequestDispatcher("OrderManagerUser.jsp").forward(request, response);
+
         } else {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -72,7 +70,7 @@ public class CartController extends BaseRequiredAuthenController {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+              throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -86,7 +84,7 @@ public class CartController extends BaseRequiredAuthenController {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+              throws ServletException, IOException {
         processRequest(request, response);
     }
 

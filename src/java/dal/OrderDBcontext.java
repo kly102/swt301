@@ -123,9 +123,9 @@ public class OrderDBcontext extends DBContext {
         
         try {
             String sql = "UPDATE [Orders]\n"
-                      + "   SET \n"
-                      + "	[status] = ? \n"
-                      + " WHERE id = ?";
+                      + "SET \n"
+                      + "[status] = ? \n"
+                      + "WHERE id = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setBoolean(1, ac);
             stm.setInt(2, id);

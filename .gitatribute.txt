@@ -5,3 +5,6 @@
 'src/java/controller/manager/ManagerOrder.java' --text
 'src/java/controller/manager/favManager.java' --text
 'web/OrderManagerUser.jsp' --text
+'src/java/controller/manager/favManager.java' --text
+'src/java/context/config.properties' --text
+'src/java/controller/OrderUserManager.java' --text

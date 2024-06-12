@@ -19,7 +19,7 @@ import model.Account;
  * @author Admin
  */
 //forgetPassword
-public class forgetPasswordController extends HttpServlet {
+public class ForgetPasswordController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -84,11 +84,9 @@ public class forgetPasswordController extends HttpServlet {
             request.getRequestDispatcher("change-newpassword.jsp").forward(request, response);
             return ;
         }
-        if (pass.equals(repass)) {
             adb.UpDatePassWord(pass,user);
             request.setAttribute("mess", "Change Pass successfully!");
             request.getRequestDispatcher("login.jsp").forward(request, response);
-        }
     }
 
     /** 

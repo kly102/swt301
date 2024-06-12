@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import model.Account;
 import model.GroupFavorite;
 import model.Product;
@@ -36,18 +37,18 @@ public class favManager extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-              throws ServletException, IOException {
-        if (request.getSession().getAttribute("acc") != null) {
-            Account account = (Account) request.getSession().getAttribute("acc");
-            System.out.println(account.getUid());
-            Account account1 = (Account)request.getSession().getAttribute("acc");
-            List<Product> listProduct = new ProductDBContext().getAllProductsF(account1.getUid());
-                      
-//            ArrayList<GroupFavorite> listGroupFavorite = new GroupFavoriteDBContext().getAllByIdUser(account.getUid());
-            request.setAttribute("products", listProduct);
-            request.getRequestDispatcher("ManagerFav.jsp").forward(request, response);
-        }
+    throws ServletException, IOException {
+    if (request.getSession().getAttribute("acc") != null) {
+        Account account = (Account) request.getSession().getAttribute("acc");
+        Logger logger = Logger.getLogger(getClass().getName());
+        logger.info("Logged in account uid: " + account.getUid());
+        Account account1 = (Account) request.getSession().getAttribute("acc");
+        
+        List<Product> listProduct = new ProductDBContext().getAllProductsF(account1.getUid());
+        request.setAttribute("products", listProduct);
+        request.getRequestDispatcher("ManagerFav.jsp").forward(request, response);
     }
+}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

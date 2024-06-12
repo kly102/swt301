@@ -47,7 +47,6 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         if (request.getSession().getAttribute("acc") != null) {
             request.getRequestDispatcher("login.jsp").forward(request, response);
-        } else {
         }
         String user = request.getParameter("Username");
         String pass = request.getParameter("Password");
@@ -58,7 +57,7 @@ public class LoginController extends HttpServlet {
             request.setAttribute("pass", pass);
             request.setAttribute("mess", "Wrong user or pass");
             request.getRequestDispatcher("login.jsp").forward(request, response);
-        } else if (a.isActive() == false) {
+        } else if (!a.isActive()) {
             request.setAttribute("user", user);
             request.setAttribute("pass", pass);
             request.setAttribute("mess", "Account has been banned");

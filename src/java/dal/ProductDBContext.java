@@ -35,7 +35,7 @@ public class ProductDBContext extends DBContext {
                 product.setTiltle(rs.getString(5));
                 product.setDescription(rs.getString(6));
                 product.setCategoryId(rs.getInt(7));
-                product.setSell_ID(rs.getInt(8));
+                product.setSellID(rs.getInt(8));
                 list.add(product);
             }
         } catch (Exception ex) {
@@ -67,7 +67,7 @@ public class ProductDBContext extends DBContext {
                 product.setTiltle(rs.getString(5));
                 product.setDescription(rs.getString(6));
                 product.setCategoryId(rs.getInt(7));
-                product.setSell_ID(rs.getInt(8));
+                product.setSellID(rs.getInt(8));
                 list.add(product);
             }
         } catch (Exception ex) {
@@ -93,7 +93,7 @@ public class ProductDBContext extends DBContext {
                 product.setTiltle(rs.getString(5));
                 product.setDescription(rs.getString(6));
                 product.setCategoryId(rs.getInt(7));
-                product.setSell_ID(rs.getInt(8));
+                product.setSellID(rs.getInt(8));
                 list.add(product);
             }
         } catch (Exception ex) {
@@ -122,7 +122,7 @@ public class ProductDBContext extends DBContext {
                 product.setTiltle(rs.getString(5));
                 product.setDescription(rs.getString(6));
                 product.setCategoryId(rs.getInt(7));
-                product.setSell_ID(rs.getInt(8));
+                product.setSellID(rs.getInt(8));
                 list.add(product);
             }
         } catch (Exception ex) {
@@ -163,7 +163,7 @@ public class ProductDBContext extends DBContext {
                 product.setTiltle(rs.getString(5));
                 product.setDescription(rs.getString(6));
                 product.setCategoryId(rs.getInt(7));
-                product.setSell_ID(rs.getInt(8));
+                product.setSellID(rs.getInt(8));
                 list.add(product);
 
             }
@@ -188,7 +188,7 @@ public class ProductDBContext extends DBContext {
                 product.setTiltle(rs.getString(5));
                 product.setDescription(rs.getString(6));
                 product.setCategoryId(rs.getInt(7));
-                product.setSell_ID(rs.getInt(8));
+                product.setSellID(rs.getInt(8));
                 return product;
             }
         } catch (Exception ex) {
@@ -217,7 +217,7 @@ public class ProductDBContext extends DBContext {
                 product.setTiltle(rs.getString(5));
                 product.setDescription(rs.getString(6));
                 product.setCategoryId(rs.getInt(7));
-                product.setSell_ID(rs.getInt(8));
+                product.setSellID(rs.getInt(8));
                 list.add(product);
             }
         } catch (Exception ex) {
@@ -252,7 +252,7 @@ public class ProductDBContext extends DBContext {
             stm.setString(4, product.getTiltle());
             stm.setString(5, product.getDescription());
             stm.setInt(6, product.getCategoryId());
-            stm.setInt(7, product.getSell_ID());
+            stm.setInt(7, product.getSellID());
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
@@ -312,7 +312,7 @@ public class ProductDBContext extends DBContext {
                 product.setTiltle(rs.getString(5));
                 product.setDescription(rs.getString(6));
                 product.setCategoryId(rs.getInt(7));
-                product.setSell_ID(rs.getInt(8));
+                product.setSellID(rs.getInt(8));
                 list.add(product);
             }
         } catch (Exception ex) {

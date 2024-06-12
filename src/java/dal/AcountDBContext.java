@@ -44,8 +44,8 @@ public class AcountDBContext extends DBContext {
         }
         return list;
     }
-    
-        public List<Account> getAllAccountByPage(int page, int PAGE_SIZE) {
+
+    public List<Account> getAllAccountByPage(int page, int pageSize) {
         List<Account> list = new ArrayList<>();
         try {
             String sql = "SELECT * FROM Account where isAdmin != 1"
@@ -53,8 +53,8 @@ public class AcountDBContext extends DBContext {
                     + "offset (?-1)*? row fetch next ? rows only";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, page);
-            stm.setInt(2, PAGE_SIZE);
-            stm.setInt(3, PAGE_SIZE);
+            stm.setInt(2, pageSize);
+            stm.setInt(3, pageSize);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Account account = new Account();
@@ -204,11 +204,9 @@ public class AcountDBContext extends DBContext {
     }
 
     public static void main(String[] args) {
-        try {
-            System.out.println(new AcountDBContext().getAccountById(4));
-
-        } catch (Exception e) {
-        }
+        AcountDBContext sd = new AcountDBContext();
+        List<Account> li = sd.getAllAccount();
+        System.out.println(li.get(0).getUid());
     }
 
     public void UpDatePassWord(String pass, String user) {
