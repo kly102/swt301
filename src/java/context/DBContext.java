@@ -24,7 +24,6 @@ public class DBContext {
             DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
             connection = DriverManager.getConnection(url, user, pass);
         } catch (Exception ex) {
-            ex.printStackTrace();
         }
     }
 }
