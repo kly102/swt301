@@ -12,7 +12,7 @@ public class DBContext {
 
     public DBContext() {
         try {
-            String user = "sa";
+            String user = "sa";;
             String pass = "123";
             String database = "AzanDB";
             String url = "jdbc:sqlserver://localhost:1433;databaseName="+database+"";
